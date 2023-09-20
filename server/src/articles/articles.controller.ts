@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { AuthJwtGuard } from 'src/auth/guards/auth-jwt.guard';
 
@@ -10,5 +10,11 @@ export class ArticlesController {
   @Get()
   getAllArticles() {
     return this.articlesService.getAllArticles();
+  }
+
+  @UseGuards(AuthJwtGuard)
+  @Get(':id')
+  getArticleById(@Param('id') id: string) {
+    return this.articlesService.getArticleById(id);
   }
 }
