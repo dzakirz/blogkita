@@ -14,13 +14,13 @@ export class AuthService {
   ) {}
 
   async registerUser(dto: AuthRegisterDto) {
-    const userExists = await this.db.user.count({
+    const user = await this.db.user.count({
       where: {
         email: dto.email,
       },
     });
 
-    if (userExists) {
+    if (user) {
       throw new ConflictException('User already exists');
     }
 
@@ -32,11 +32,17 @@ export class AuthService {
         email: dto.email,
         name: dto.name,
         password: hashedPassword,
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
+        userProfile: {
+          create: {
+            bio: 'Hello there!',
+          },
+        },
+        articles: {
+          create: {
+            title: `Just joined!`,
+            content: 'Hello my friends!, I just joined this awesome platform!',
+          },
+        },
       },
     });
 
