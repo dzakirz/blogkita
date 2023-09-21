@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -18,7 +18,7 @@ model User {
   name     String  @map("name") @db.VarChar(50)
   email    String  @unique @map("email") @db.VarChar(100)
   password String  @map("password") @db.VarChar(255)
-  isAdmin  Boolean @default(false) @map("is_admin") @db.TinyInt()
+  isAdmin  Boolean @default(false) @map("is_admin") @db.Boolean()
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
