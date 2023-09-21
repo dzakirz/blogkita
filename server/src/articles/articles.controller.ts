@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -31,5 +32,11 @@ export class ArticlesController {
   @Post()
   createArticle(@Req() req: any, @Body() dto: CreateArticleDto) {
     return this.articlesService.createArticle(req, dto);
+  }
+
+  @UseGuards(AuthJwtGuard)
+  @Put(':id')
+  updateArticle(@Param('id') id: string, @Body() dto: CreateArticleDto) {
+    return this.articlesService.updateArticle(id, dto);
   }
 }

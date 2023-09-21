@@ -45,4 +45,24 @@ export class ArticlesService {
 
     return result;
   }
+
+  async updateArticle(id: string, dto: CreateArticleDto) {
+    const article = await this.db.article.update({
+      where: { id },
+      data: {
+        title: dto.title,
+        content: dto.content,
+      },
+    });
+
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+
+    const result = {
+      message: 'Article updated successfully',
+    };
+
+    return result;
+  }
 }
