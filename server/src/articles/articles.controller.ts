@@ -11,6 +11,7 @@ import {
 import { AuthJwtGuard } from 'src/auth/guards/auth-jwt.guard';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
+import { UpdateArticleDto } from './dto/update-article.dto';
 
 @Controller('articles')
 export class ArticlesController {
@@ -36,7 +37,7 @@ export class ArticlesController {
 
   @UseGuards(AuthJwtGuard)
   @Put(':id')
-  updateArticle(@Param('id') id: string, @Body() dto: CreateArticleDto) {
+  updateArticle(@Param('id') id: string, @Body() dto: UpdateArticleDto) {
     return this.articlesService.updateArticle(id, dto);
   }
 }
