@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -39,5 +40,11 @@ export class ArticlesController {
   @Put(':id')
   updateArticle(@Param('id') id: string, @Body() dto: UpdateArticleDto) {
     return this.articlesService.updateArticle(id, dto);
+  }
+
+  @UseGuards(AuthJwtGuard)
+  @Delete(':id')
+  deleteArticle(@Param('id') id: string) {
+    return this.articlesService.deleteArticle(id);
   }
 }

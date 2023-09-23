@@ -66,4 +66,24 @@ export class ArticlesService {
 
     return result;
   }
+
+  async deleteArticle(id: string) {
+    const article = await this.db.article.count({
+      where: { id },
+    });
+
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+
+    await this.db.article.delete({
+      where: { id },
+    });
+
+    const result = {
+      message: 'Article deleted successfully',
+    };
+
+    return result;
+  }
 }
