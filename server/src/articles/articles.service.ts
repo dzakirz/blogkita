@@ -48,12 +48,8 @@ export class ArticlesService {
   }
 
   async updateArticle(id: string, dto: UpdateArticleDto) {
-    const article = await this.db.article.update({
+    const article = await this.db.article.count({
       where: { id },
-      data: {
-        title: dto.title,
-        content: dto.content,
-      },
     });
 
     if (!article) {
@@ -63,6 +59,14 @@ export class ArticlesService {
     const result = {
       message: 'Article updated successfully',
     };
+
+    await this.db.article.update({
+      where: { id },
+      data: {
+        title: dto.title,
+        content: dto.content,
+      },
+    });
 
     return result;
   }
