@@ -48,9 +48,7 @@ export class ArticlesService {
   }
 
   async updateArticle(id: string, dto: UpdateArticleDto) {
-    const article = await this.db.article.count({
-      where: { id },
-    });
+    const article = await this.countArticles(id);
 
     if (!article) {
       throw new NotFoundException('Article not found');
@@ -72,9 +70,7 @@ export class ArticlesService {
   }
 
   async deleteArticle(id: string) {
-    const article = await this.db.article.count({
-      where: { id },
-    });
+    const article = await this.countArticles(id);
 
     if (!article) {
       throw new NotFoundException('Article not found');
@@ -89,5 +85,17 @@ export class ArticlesService {
     };
 
     return result;
+  }
+
+  async countArticles(id: string) {
+    const article = await this.db.article.count({
+      where: { id },
+    });
+
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+
+    return article;
   }
 }
