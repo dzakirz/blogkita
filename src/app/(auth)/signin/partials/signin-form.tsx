@@ -1,4 +1,5 @@
 "use client"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -71,6 +72,7 @@ export function SigninForm() {
             </FormItem>
           )}
         />
+        <Button className="w-full">Sign in</Button>
       </form>
     </Form>
   )

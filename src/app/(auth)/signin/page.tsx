@@ -42,8 +42,7 @@ export default function SigninPage() {
           </div>
           <SigninForm />
         </CardContent>
-        <CardFooter className="flex flex-col gap-2">
-          <Button className="w-full">Create account</Button>
+        <CardFooter className="flex flex-col gap-2 -mt-4">
           <div className="flex justify-center">
             <Label className="text-sm font-light">
               Don't have an account?
