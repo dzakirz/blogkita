@@ -1,10 +1,5 @@
-import { inter } from "@/lib/fonts"
-import { Metadata } from "next"
+import { poppins } from "@/lib/fonts"
 import "@/styles/globals.css"
-
-export const metadata: Metadata = {
-  title: "Blogkita"
-}
 
 type Props = {
   children: React.ReactNode
@@ -13,7 +8,7 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={poppins.className}>{children}</body>
     </html>
   )
 }
